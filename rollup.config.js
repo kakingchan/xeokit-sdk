@@ -8,11 +8,11 @@ export default {
             format: 'es',
             name: 'bundle'
         },
-        {
-            file: './dist/xeokit-sdk.cjs.js',
-            format: 'cjs',
-            name: 'bundle'
-        }
+        // {
+        //     file: './dist/xeokit-sdk.cjs.js',
+        //     format: 'cjs',
+        //     name: 'bundle'
+        // }
     ],
     plugins: [
         nodeResolve({
