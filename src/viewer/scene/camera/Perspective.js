@@ -55,14 +55,24 @@ class Perspective extends Component {
         this.fovAxis = cfg.fovAxis;
         this.near = cfg.near;
         this.far = cfg.far;
+        // ---------StereoCamera Modify Start-------------
+        this.isStereoCamera = cfg.isStereoCamera || false;
+        // ---------StereoCamera Modify End-------------
     }
 
     _update() {
-
+        
         const WIDTH_INDEX = 2;
         const HEIGHT_INDEX = 3;
         const boundary = this.scene.viewport.boundary;
-        const aspect = boundary[WIDTH_INDEX] / boundary[HEIGHT_INDEX];
+        // ---------StereoCamera Modify Start-------------
+        // const aspect = boundary[WIDTH_INDEX] / boundary[HEIGHT_INDEX];
+        let aspect = boundary[WIDTH_INDEX] / boundary[HEIGHT_INDEX];
+        if (this.isStereoCamera) {
+          aspect = boundary[WIDTH_INDEX] * 2 / boundary[HEIGHT_INDEX];
+        }
+        // ---------StereoCamera Modify End-------------
+
         const fovAxis = this._fovAxis;
 
         let fov = this._fov;

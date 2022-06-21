@@ -247,13 +247,21 @@ class SAODepthLimitedBlurRenderer {
         const gl = this._scene.canvas.gl;
         const program = this._program;
         const scene = this._scene;
-        const viewportWidth = gl.drawingBufferWidth;
-        const viewportHeight = gl.drawingBufferHeight;
+        // ---canvasBoundary Modify Start---
+        // const viewportWidth = gl.drawingBufferWidth;
+        // const viewportHeight = gl.drawingBufferHeight;
+        const canvasBoundary = scene.canvas.boundary;
+        const canvasWidth = canvasBoundary[2];
+        const canvasHeight = canvasBoundary[3];
+        // ---canvasBoundary Modify End---
         const projectState = scene.camera.project._state;
         const near = projectState.near;
         const far = projectState.far;
 
-        gl.viewport(0, 0, viewportWidth, viewportHeight);
+        // ---canvasBoundary Modify Start---
+        // gl.viewport(0, 0, viewportWidth, viewportHeight);
+        gl.viewport(canvasBoundary[0], canvasBoundary[1], canvasBoundary[2], canvasBoundary[3]);
+        // ---canvasBoundary Modify End---
         gl.clearColor(0, 0, 0, 1);
         gl.enable(gl.DEPTH_TEST);
         gl.disable(gl.BLEND);
@@ -262,8 +270,12 @@ class SAODepthLimitedBlurRenderer {
 
         program.bind();
 
-        tempVec2a[0] = viewportWidth;
-        tempVec2a[1] = viewportHeight;
+        // ---canvasBoundary Modify Start---
+        // tempVec2a[0] = viewportWidth;
+        // tempVec2a[1] = viewportHeight;
+        tempVec2a[0] = canvasWidth;
+        tempVec2a[1] = canvasHeight;
+        // ---canvasBoundary Modify End---
 
         gl.uniform2fv(this._uViewport, tempVec2a);
         gl.uniform1f(this._uCameraNear, near);

@@ -183,7 +183,11 @@ const Renderer = function (scene, options) {
      */
     this.clear = function (params) {
         params = params || {};
-        gl.viewport(0, 0, gl.drawingBufferWidth, gl.drawingBufferHeight);
+        // ---canvasBoundary Modify Start---
+        // gl.viewport(0, 0, gl.drawingBufferWidth, gl.drawingBufferHeight);
+        const boundary = scene.viewport.boundary;
+        gl.viewport(boundary[0], boundary[1], boundary[2], boundary[3]);
+        // ---canvasBoundary Modify End---
         if (canvasTransparent) {
             gl.clearColor(1, 1, 1, 1);
         } else {
@@ -348,8 +352,12 @@ const Renderer = function (scene, options) {
 
         frameCtx.reset();
         frameCtx.pass = params.pass;
-
-        gl.viewport(0, 0, gl.drawingBufferWidth, gl.drawingBufferHeight);
+        
+       // ---canvasBoundary Modify Start---
+        // gl.viewport(0, 0, gl.drawingBufferWidth, gl.drawingBufferHeight);
+        const boundary = scene.viewport.boundary;
+        gl.viewport(boundary[0], boundary[1], boundary[2], boundary[3]);
+        // ---canvasBoundary Modify End---
 
         gl.clearColor(0, 0, 0, 0);
         gl.enable(gl.DEPTH_TEST);
@@ -432,7 +440,11 @@ const Renderer = function (scene, options) {
         frameCtx.shadowViewMatrix = light.getShadowViewMatrix();
         frameCtx.shadowProjMatrix = light.getShadowProjMatrix();
 
-        gl.viewport(0, 0, gl.drawingBufferWidth, gl.drawingBufferHeight);
+       // ---canvasBoundary Modify Start---
+        // gl.viewport(0, 0, gl.drawingBufferWidth, gl.drawingBufferHeight);
+        const boundary = scene.viewport.boundary;
+        gl.viewport(boundary[0], boundary[1], boundary[2], boundary[3]);
+        // ---canvasBoundary Modify End---
 
         gl.clearColor(0, 0, 0, 1);
         gl.enable(gl.DEPTH_TEST);
@@ -497,7 +509,11 @@ const Renderer = function (scene, options) {
             frameCtx.pbrEnabled = pbrEnabled && !!scene.pbrEnabled;
             frameCtx.colorTextureEnabled = colorTextureEnabled && !!scene.colorTextureEnabled;
 
-            gl.viewport(0, 0, gl.drawingBufferWidth, gl.drawingBufferHeight);
+            // ---canvasBoundary Modify Start---
+            // gl.viewport(0, 0, gl.drawingBufferWidth, gl.drawingBufferHeight);
+            const boundary = scene.viewport.boundary;
+            gl.viewport(boundary[0], boundary[1], boundary[2], boundary[3]);
+            // ---canvasBoundary Modify End---
 
             if (canvasTransparent) {
                 gl.clearColor(0, 0, 0, 0);
@@ -1067,7 +1083,11 @@ const Renderer = function (scene, options) {
         frameCtx.pickProjMatrix = pickProjMatrix;
         frameCtx.pickInvisible = !!params.pickInvisible;
 
-        gl.viewport(0, 0, gl.drawingBufferWidth, gl.drawingBufferHeight);
+        // ---canvasBoundary Modify Start---
+        // gl.viewport(0, 0, gl.drawingBufferWidth, gl.drawingBufferHeight);
+        const boundary = scene.viewport.boundary;
+        gl.viewport(boundary[0], boundary[1], boundary[2], boundary[3]);
+        // ---canvasBoundary Modify End---
 
         gl.clearColor(0, 0, 0, 0);
         gl.enable(gl.DEPTH_TEST);
@@ -1128,7 +1148,11 @@ const Renderer = function (scene, options) {
         frameCtx.pickProjMatrix = pickProjMatrix; // Can be null
         // frameCtx.pickInvisible = !!params.pickInvisible;
 
-        gl.viewport(0, 0, gl.drawingBufferWidth, gl.drawingBufferHeight);
+        // ---canvasBoundary Modify Start---
+        // gl.viewport(0, 0, gl.drawingBufferWidth, gl.drawingBufferHeight);
+        const boundary = scene.viewport.boundary;
+        gl.viewport(boundary[0], boundary[1], boundary[2], boundary[3]);
+        // ---canvasBoundary Modify End---
 
         gl.clearColor(0, 0, 0, 0);
         gl.enable(gl.DEPTH_TEST);
@@ -1169,7 +1193,11 @@ const Renderer = function (scene, options) {
             frameCtx.pickZNear = nearAndFar[0];
             frameCtx.pickZFar = nearAndFar[1];
 
-            gl.viewport(0, 0, gl.drawingBufferWidth, gl.drawingBufferHeight);
+            // ---canvasBoundary Modify Start---
+            // gl.viewport(0, 0, gl.drawingBufferWidth, gl.drawingBufferHeight);
+            const boundary = scene.viewport.boundary;
+            gl.viewport(boundary[0], boundary[1], boundary[2], boundary[3]);
+            // ---canvasBoundary Modify End---
 
             gl.clearColor(0, 0, 0, 0);
             gl.enable(gl.DEPTH_TEST);
@@ -1242,7 +1270,11 @@ const Renderer = function (scene, options) {
         frameCtx.pickViewMatrix = pickViewMatrix;
         frameCtx.pickProjMatrix = pickProjMatrix;
 
-        gl.viewport(0, 0, gl.drawingBufferWidth, gl.drawingBufferHeight);
+        // ----canvasBoundary Modify Start----
+        // gl.viewport(0, 0, gl.drawingBufferWidth, gl.drawingBufferHeight);
+        const boundary = scene.viewport.boundary;
+        gl.viewport(boundary[0], boundary[1], boundary[2], boundary[3]);
+        // ----canvasBoundary Modify End----
 
         gl.clearColor(0, 0, 0, 0);
         gl.enable(gl.DEPTH_TEST);
@@ -1304,7 +1336,11 @@ const Renderer = function (scene, options) {
             frameCtx.backfaces = true;
             frameCtx.frontface = true; // "ccw"
 
-            gl.viewport(0, 0, gl.drawingBufferWidth, gl.drawingBufferHeight);
+            // ---canvasBoundary Modify Start---
+            // gl.viewport(0, 0, gl.drawingBufferWidth, gl.drawingBufferHeight);
+            const boundary = scene.viewport.boundary;
+            gl.viewport(boundary[0], boundary[1], boundary[2], boundary[3]);
+            // ---canvasBoundary Modify End---
             gl.clearColor(0, 0, 0, 0);
             gl.enable(gl.DEPTH_TEST);
             gl.disable(gl.CULL_FACE);
